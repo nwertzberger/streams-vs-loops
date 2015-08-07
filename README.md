@@ -1,11 +1,13 @@
 # streams-vs-loops
 Streams Versus Loops
 
-I've discovered that, for very tight loops, streams and collections don't compete
-with regular for loops and arrays. I would also like to mention that, despite
-whatever performance costs you may have for these streams in this case, the
+For very tight loops, streams and collections don't compete with regular for loops
+and arrays. Despite whatever performance costs you may have for these streams in this case, the
 stream api and collections are far more readable, and, if looping over more
-complicated functions, would represent a negligible cost.
+complicated functions, probably doesn't cost all that much.
+
+This is more of a "Function calls cost" proof, and i will just assume the huge performance difference
+may have more to do with what the JIT + L2 caches can pull off in the more dense example.
 
 # Running this
 
