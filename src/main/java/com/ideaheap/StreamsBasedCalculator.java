@@ -11,11 +11,10 @@ public class StreamsBasedCalculator {
         final Set<String> stringSet,
         final Map<String, Double> stringCosts) {
 
-        Set<Map.Entry<String, Double>> stringCostSet = stringCosts.entrySet();
         return stringCosts.keySet().parallelStream().collect(
             Collectors.toConcurrentMap(
                 (state) -> state,
-                (state) -> stringTransitionCost(state, stringSet, stringCostSet)
+                (state) -> stringTransitionCost(state, stringSet, stringCosts)
             )
         );
     }
@@ -23,7 +22,7 @@ public class StreamsBasedCalculator {
     private String stringTransitionCost(
         final String state,
         final Set<String> stringSet,
-        final Set<Map.Entry<String, Double>> expectedUtilities) {
+        final Map<String, Double> expectedUtilities) {
         return stringSet.stream().max(
             Comparator.comparing(
                 act -> calculateExpectedUtility(state, act, expectedUtilities)
@@ -34,9 +33,10 @@ public class StreamsBasedCalculator {
     private Double calculateExpectedUtility(
         String state,
         String act,
-        Set<Map.Entry<String, Double>> expectedUtilities) {
+        Map<String, Double> expectedUtilities) {
 
         return expectedUtilities
+            .entrySet()
             .stream()
             .mapToDouble(
                 n -> getStateProbability(state, act, n.getKey()) * n.getValue()

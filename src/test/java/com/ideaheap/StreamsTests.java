@@ -2,6 +2,7 @@ package com.ideaheap;
 
 import com.ideaheap.StreamsBasedCalculator;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -12,11 +13,11 @@ import java.util.*;
  */
 public class StreamsTests {
 
-    private Map<String, Double> stringMap = new HashMap<>();
-    private Set<String> stringSet = new HashSet<>();
+    private static Map<String, Double> stringMap = new HashMap<>();
+    private static Set<String> stringSet = new HashSet<>();
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeClass
+    public static void setUp() throws Exception {
         Random random = new Random();
         for (int i = 0; i < 5000; i++) {
             stringMap.put(UUID.randomUUID().toString(), random.nextDouble());
@@ -37,6 +38,7 @@ public class StreamsTests {
 
     }
 
+    @Ignore
     @Test
     public void streamsTestNoStreams() throws Exception {
         LoopsBasedCalculator calculator = new LoopsBasedCalculator();

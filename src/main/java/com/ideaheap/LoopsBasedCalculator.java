@@ -38,7 +38,7 @@ public class LoopsBasedCalculator {
                 stringValue += getStateProbability(state, str, entry.getKey())
                     * entry.getValue();
             }
-            if (maxString == null || stringValue > maxStringValue) {
+            if (maxString == null && stringValue > maxStringValue) {
                 maxStringValue = stringValue;
                 maxString = str;
             }
