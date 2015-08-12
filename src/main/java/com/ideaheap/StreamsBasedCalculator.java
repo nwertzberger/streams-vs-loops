@@ -23,14 +23,13 @@ public class StreamsBasedCalculator {
         final String state,
         final Set<String> stringSet,
         final Map<String, Double> expectedUtilities) {
-
-        return Double.toString(stringSet
-        .stream()
-        .mapToDouble(act -> calculateExpectedUtility(state, act, expectedUtilities))
-        .max()
-        .getAsDouble());
+        return stringSet.stream().max(
+            Comparator.comparing(
+                act -> calculateExpectedUtility(state, act, expectedUtilities)
+            )
+        ).get();
     }
-//
+
     private Double calculateExpectedUtility(
         String state,
         String act,
